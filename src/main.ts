@@ -8,9 +8,19 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   const config = app.get(AppConfigService);
 
+  const allowedOrigins = [
+    'http://localhost:5173',
+    'https://erpfrontenupload2.vercel.app',
+  ];
+
   app.setGlobalPrefix('api');
   app.use(helmet());
-  app.enableCors({ origin: config.frontendUrl });
+  app.enableCors({
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
