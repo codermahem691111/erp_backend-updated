@@ -27,7 +27,7 @@ Fill in `.env`:
 | `SUPABASE_URL` | Project Settings -> API -> **Project URL** (`https://xxxx.supabase.co`) |
 | `SUPABASE_PUBLISHABLE_KEY` | Project Settings -> API Keys -> **Publishable key** (`sb_publishable_...`) |
 | `SUPABASE_SERVICE_ROLE_KEY` | Project Settings -> API Keys -> **Secret key** (`sb_secret_...`). Never share it or put it in the frontend. |
-| `FRONTEND_URL` | `http://localhost:5173` while developing |
+| `FRONTEND_URL` | `https://erpfrontenupload2.vercel.app/auth` |
 
 ### 2. Create the tables
 Supabase -> **SQL Editor** -> New query:
@@ -41,9 +41,9 @@ Each of those three service tables is keyed by `company_id` (the signed-in auth 
 ### 3. Configure Supabase Auth (dashboard)
 1. **Authentication -> Sign In / Providers -> Email**: make sure **Confirm email** is ON.
 2. **Authentication -> URL Configuration**:
-   - **Site URL**: `http://localhost:5173`
-   - **Redirect URLs**: add `http://localhost:5173/email-verified`
-   (When you go live, add your real domain here too.)
+   - **Site URL**: `https://erpfrontenupload2.vercel.app/auth`
+   - **Redirect URLs**: add `https://erpfrontenupload2.vercel.app/auth/email-verified`
+   (Add local development URLs separately if needed.)
 3. **Email delivery** – pick one:
    - *Quick test:* do nothing. Supabase's built-in email only sends to **members of your Supabase organization** and only **2 emails per hour**. Register with your own Supabase account email.
    - *Any recipient (recommended):* **Authentication -> Emails -> SMTP Settings** -> enable custom SMTP. Example with Gmail:
